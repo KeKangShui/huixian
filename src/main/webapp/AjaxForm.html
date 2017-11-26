@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test AjaxForm </title>
+    <script type="text/javascript" src="res/js/jquery.form.js"/>
+<!--<script type="text/javascript">
+    $("#myForm").ajaxForm(function () {
+        $("#output").innerText("提交成功，欢迎下次再来").show();
+    })
+
+    $('#myForm2').submit(function() {
+        $(this).ajaxSubmit(function() {
+            $('#output2').html("提交成功！欢迎下次再来！").show();
+        });
+        return false; //阻止表单默认提交
+    });
+</script>-->
+</head>
+<body>
+<!--<div align="center" style="margin-top: 80px">
+    <form id="myForm">
+       品牌名称： <input type="text" name="brandname"><br/><span id="output"/><br/>
+        类型：  <input type="text" name="type">
+        <input type="submit" value="提交">
+    </form>
+</div><br/><br/>
+<div align="center">
+    <form id="myForm2">
+        牙膏名称： <input type="text" name="brandname"><br/><span id="output2"/><br/>
+        款式类型：  <input type="text" name="type">
+        <input type="submit" value="提交">
+    </form>
+</div>-->
+<div id="middle" style="text-align: center">
+    <form action="/login.do" id="jvForm" method="post" enctype="multipart/form-data">
+
+        <li style="font-size: 48px">
+            <img id="user_image" class="denglu_pic" src="/res/img/timg.jpg"
+                 style="height: 100px;width: 100px;border-radius:60px;margin-top: 30px"></li>
+        <table style="margin-top: 30px" align="center">
+            <tr>
+                <td>用户名： <input type="text" name="name"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <img width="100" height="100" id="allImgUrl"/>
+                    <!--<input type="hidden" name="imgUrl" id="path"/>-->
+                    <input type="file"  name="file" onchange="uplo()"/>
+                </td>
+            </tr>
+        </table>
+        <input type="submit"  value="提交">
+    </form>
+</div>
+</body>
+</html>

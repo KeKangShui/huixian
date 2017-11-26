@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索栏</title>
+    <style>
+    *{
+        margin: 0px;
+        padding: 0px;
+    }
+    #mydiv{
+        position: absolute;
+        left: 50%;
+        top:50%;
+        margin-left: -200px;
+        margin-top: -50px;
+    }
+    #search{
+        width: 300px;
+    }
+</style>
+    <script type="text/javascript">
+        var ajax=null;
+        ajax = getAjax();
+      function getMoreContent() {
+
+         var content = document.getElementById("search");
+         if (content.value==""){
+             clearContent();
+             return "";
+         }
+//         alert(content.value);
+
+         var url = "/search?keyword="+escape(content.value);
+//         alert(url);
+         ajax.open("get",url,true);
+         ajax.onreadystatechange=callback;
+         ajax.send(null);
+         
+      }
+
+      function callback() {
+
+          if (ajax.readyState==4){
+              if (ajax.status==200){
+//                  alert(ajax.status)
+                  var result =ajax.responseText;
+//                  alert(result);
+                  var json = eval("("+result+")");
+                  setContent(json);
+              }
+          }
+      }
+      /*设置关联数据, 参数代表的是服务器传递过来的数据*/
+      function setContent(contents) {
+          /*清空之前的数据*/
+          clearContent();
+          /*首先获得关联数据的长度*/
+          var size = contents.length;
+          /*设置内容*/
+          for (var i = 0; i < size; i++) {
+              var nextNode = contents[i];
+              /*代表的是json格式数据的第I个元素*/
+              var tr = document.createElement("tr");
+              var td = document.createElement("td");
+              td.setAttribute("border", "0");
+              td.setAttribute("bgcolor", "#FFFAFA");
+              td.onmouseover = function () {
+                  this.className = 'mouseOver';
+              };
+              td.onmouseout = function () {
+                  this.className = 'mouseOut';
+              }
+              td.onclick = function () {
+
+              };
+              var text = document.createTextNode(nextNode);
+              td.appendChild(text);
+              tr.appendChild(td);
+              document.getElementById("content_table").appendChild(tr);
+
+
+          }
+      }
+      function clearContent() {
+          var contentTable = document.getElementById("content_table");
+          var size =contentTable.childNodes.length;
+          for(var i=size-1;i>=0;i--){
+              contentTable.removeChild(contentTable.childNodes[i]);
+          }
+          
+      }
+      function getAjax() {
+          var xmlhttp;
+          if (window.XMLHttpRequest) {//非IE浏览器
+              xmlhttp = new XMLHttpRequest();
+          }
+          if (window.ActiveXObject){
+              xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+              if(!xmlhttp){
+                  xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");
+              }
+          }
+
+          return xmlhttp;
+      }
+    </script>
+</head>
+<body>
+<div id="mydiv">
+    <input type="text" size="50" onblur="clearContent()" onfocus="getMoreContent()" id="search" onkeyup="getMoreContent()"/>
+    <input type="button" value="百度一下" style="width: 100px">
+    <!-- 下面是内容展示区 -->
+    <div id="popDiv">
+        <table id="content_table">
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

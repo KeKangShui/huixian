@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <script src="res/js/getAjax.js"/>
+
+</head>
+<body>
+<div id="middle" style="text-align: center">
+    <form action="/login.do" id="jvForm" method="post" enctype="multipart/form-data">
+
+        <li style="font-size: 48px">
+            <img id="user_image" class="denglu_pic" src="/res/img/timg.jpg"
+                                         style="height: 100px;width: 100px;border-radius:60px;margin-top: 30px"></li>
+        <table style="margin-top: 30px" align="center">
+            <tr>
+                <td>用户名： <input type="text" name="name"/></td>
+            </tr>
+            <tr>
+                <td>
+                   <img width="100" height="100" id="allImgUrl"/>
+                    <!--<input type="hidden" name="imgUrl" id="path"/>-->
+                    <input type="file"  name="file" onchange="uplo()"/>
+                </td>
+            </tr>
+        </table>
+        <input type="submit"  value="提交">
+    </form>
+</div>
+<script TYPE="text/javascript">
+    function uplo() {
+//            alert("hello !! boy");
+//		    定义参数
+        var ajax = getAjax();
+        alert(ajax);
+    }
+</script>
+</body>
+</html>
